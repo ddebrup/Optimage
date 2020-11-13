@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/addyson-martin/dell_h2h_coders_legacy#readme",
   "dependencies": {
+    "aws-sdk": "^2.792.0",
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",

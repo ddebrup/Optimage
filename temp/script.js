@@ -2,7 +2,6 @@ let dropArea = document.getElementById("drop-area");
 let fileForStaging = null;
 const instanceAxios = axios.create({
   timeout: 8000,
-  // headers: { Authorization: "Bearer " + token },
 });
 const reqListener = (method, url, data, progress) => {
   return new Promise((resolve, reject) => {
@@ -10,7 +9,11 @@ const reqListener = (method, url, data, progress) => {
       method: method,
       url: url,
       data: data,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImI1MTgwNTRAaWlpdC1iaC5hYy5pbiIsImlhdCI6MTYwNTMwMDM1MywiZXhwIjoxNjA1OTA1MTUzLCJpc3MiOiJhY2NvdW50cy5ndXB0YS5jb20ifQ.wAjwrrvtrDxjhSLyXOKJjxwTI5sWzzHSVtJ8dsqVtmg",
+      },
       onUploadProgress: function (progressEvent) {
         const { total, loaded } = progressEvent;
         progress = (loaded / total) * 100;
