@@ -13,6 +13,7 @@ router.get(
 router.use("/sign-in", require("./sign-in"));
 router.use("/sign-up", require("./sign-up"));
 router.use("/otp", require("./otp"));
+router.use("/upload",require("./fileUpload"));
 
 
 
