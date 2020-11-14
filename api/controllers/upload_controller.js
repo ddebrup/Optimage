@@ -2,9 +2,8 @@ const s3 = require("../config/aws_s3");
 const fs = require("fs");
 
 const imageUploader = async (req, res) => {
-  console.log(req.file.path);
+  const pathtemp = req.file.path;
   if (req.file) {
-    //here we can call flask server api for image
     res.status(200).json({
       success: true,
       message: "reached",
@@ -47,7 +46,7 @@ const getObjectFromS3 = (key) => {
     }
     if (data) {
       const base64Data = Buffer.from(data.Body).toString("base64");
-      // console.log(base64Data);
+      console.log(base64Data);
     }
   });
 };
