@@ -2,11 +2,12 @@ const s3 = require("../config/aws_s3");
 const fs = require("fs");
 
 const imageUploader = async (req, res) => {
-  const pathtemp = req.file.path;
+  console.log(req.file);
   if (req.file) {
     res.status(200).json({
       success: true,
       message: "reached",
+      unique_id: req.file.filename,
     });
     console.log("success in saving file");
   } else {

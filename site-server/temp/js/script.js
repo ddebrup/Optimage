@@ -1,5 +1,7 @@
 let dropArea = document.getElementById("drop-area");
 let fileForStaging = null;
+let imageUniqueId, current_image_width, current_image_height;
+
 const instanceAxios = axios.create({
   timeout: 8000,
 });
@@ -101,4 +103,7 @@ const uploadFile = async (file) => {
     progress
   );
   console.log(success, err);
+  if (success && success.success) {
+    imageUniqueId = success.unique_id;
+  }
 };
