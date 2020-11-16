@@ -9,6 +9,7 @@ import numpy as np
 import os
 import sys
 from skimage import io
+from skimage.color import rgba2rgb
 
 
 # In[77]:
@@ -25,6 +26,10 @@ path = sys.argv[1]
 out = sys.argv[2]
 matimg = io.imread(path)
 
+if matimg.shape[2]==4:
+	matimg= rgba2rgb(matimg)
+	io.imsave('pcacontrast.png',matimg)
+	matimg = io.imread('pcacontrast.png')
 
 # In[51]:
 

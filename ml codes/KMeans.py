@@ -10,6 +10,7 @@ import numpy as np
 import sys
 import os
 from skimage import io
+from skimage.color import rgba2rgb
 
 # In[26]:
 
@@ -21,6 +22,11 @@ out = sys.argv[2]
 
 #print('Enter appropriate number of argument')
 matimg = io.imread(path)
+if matimg.shape[2]==4:
+	matimg = rgba2rgb(matimg)
+io.imsave('contrast.png',matimg)
+print('saved')
+matimg = io.imread('contrast.png')
 
 
 # In[27]:
