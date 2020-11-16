@@ -1,0 +1,38 @@
+{
+  "name": "dell_h2h_coders_legacy",
+  "version": "1.0.0",
+  "description": "This is our dell h2h codebase Team Name - Coders Legacy Problem Statement-``` IMAGE AUTO OPTIMIZATION ENGINE``` We will be updating readme as project progress.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/addyson-martin/dell_h2h_coders_legacy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/addyson-martin/dell_h2h_coders_legacy/issues"
+  },
+  "homepage": "https://github.com/addyson-martin/dell_h2h_coders_legacy#readme",
+  "dependencies": {
+    "aws-sdk": "^2.792.0",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.3",
+    "jsonwebtoken": "^8.5.1",
+    "kue": "^0.11.6",
+    "mongoose": "^5.10.13",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.16",
+    "nodemon": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "request": "^2.88.2"
+  }
+}
