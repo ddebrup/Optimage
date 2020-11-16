@@ -9,18 +9,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import os
-
+from skimage import io
 
 # In[26]:
 
 
 #file path required to be input as needed
-if len(sys.argv[1]) == 2:
-    path = sys.argv[1]
-    out = sys.argv[2]
-else:
-    print('Enter appropriate number of argument')
-matimg = imread(path)
+
+path = sys.argv[1]
+out = sys.argv[2]
+
+#print('Enter appropriate number of argument')
+matimg = io.imread(path)
 
 
 # In[27]:
@@ -41,13 +41,13 @@ from sklearn.cluster import KMeans
 
 
 #function to compute image size
-from PIL import Image
-from io import BytesIO
-def imageByteSize(img):
-    img_file = BytesIO()
-    image = Image.fromarray(np.uint8(img))
-    image.save(img_file, 'jpeg')
-    return img_file.tell()/1024
+#from PIL import Image
+#from io import BytesIO
+#def imageByteSize(img):
+   # img_file = BytesIO()
+   # image = Image.fromarray(np.uint8(img))
+   # image.save(img_file, 'jpeg')
+    #return img_file.tell()/1024
 
 
 # In[30]:
@@ -112,7 +112,7 @@ from matplotlib.pyplot import imsave
 # In[39]:
 
 
-imsave(os.path.join(out,'result.jpeg'),comp_img)
+io.imsave(out,comp_img)
 
 
 # In[ ]:
