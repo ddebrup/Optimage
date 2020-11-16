@@ -34,11 +34,8 @@ app.set("views", pathToViews);
 // index routes
 app.use("/api", customApiLimit);
 app.use("/api", require("./api/routes"));
-
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "server up...check apis" });
-});
 app.use("/test", express.static(pathToTemp));
+app.use(require("./site_routes"));
 
 app.listen(port, function (err) {
   if (err) {

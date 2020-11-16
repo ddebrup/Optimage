@@ -19,4 +19,10 @@ router.use(
   require("./fileUpload")
 );
 
+router.use(
+  "/services",
+  passport.authenticate("jwt", { session: false }),
+  require("./services.js")
+);
+
 module.exports = router;

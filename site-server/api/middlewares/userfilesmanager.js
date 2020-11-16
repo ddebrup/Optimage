@@ -1,5 +1,5 @@
 const path = require("path");
-const pathToUploads = path.join(__dirname, "../../uploads");
+const pathToUploads = path.join(__dirname, "../../../uploads");
 const fs = require("fs");
 
 const createUserDir = (name) => {

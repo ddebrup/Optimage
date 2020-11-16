@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Image Resizing with Canvas</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="./css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="./css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="./css/component.css" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		<div id="drop-area">
+			<form class="my-form">
+			  <p>Select file or drag and drop</p>
+			  <input type="file" id="fileElem" name="imgfile" accept="image/*" onchange="handleFiles(this.files)">
+			  <label class="button" for="fileElem">Select Image</label>
+			</form> 
+			<p style="padding: 10px;" id="process_percentage"></p>
+			<div id="gallery"></div>
+		</div>
+		
+
+		<div class="container" id="resize-container" style="display: none;">
+			<div class="content">
+				<header class="codrops-header">
+					<h1>
+						TESTING RESIZE USING CANVAS
+					</h1>
+				</header>
+				<div class="component">
+					<img id="resize-img" class="resize-image" alt="image for resizing">
+				</div>
+			
+			</div>
+		</div>
+
+		<script src="./js/jquery-2.1.1.min.js"></script>
+		<script src="./js/component.js"></script>
+		<script src="./js/script.js"></script>
+	</body>
+</html>
