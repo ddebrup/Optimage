@@ -9,6 +9,7 @@ import os
 import cv2
 import time
 from collections import deque
+import json
 sys.setrecursionlimit(2000)
 
 
@@ -231,23 +232,25 @@ def encodePixelValue(huffmanMap, img_array):
     return encoded_px
 
 
-def decompress(path_img, filename, dim_val):
-    # all input goes here
-    path = path_img
-    file_name = filename
-    dim = dim_val
-    with open(os.path.join(path, f"{file_name}.huff"), "rb") as f:
-        enc_img = f.read()
+def decompress(path_img, filename, dim_val, out_dir_path):
+    try:
+        # all input goes here
+        file_name_withoutext = filename.split('.')[0]
+        dim = dim_val
+        with open(path_img, "rb") as f:
+            enc_img = f.read()
 
-    b_enc_img = ''.join(map(lambda x: '{:08b}'.format(x), enc_img))
-    # DIM
-    arr_img = huffmanImageDecoder(b_enc_img, dim)
-    arr_img = arr_img.astype('uint8')
-    decode_stop_time = time.time()
-    huffman_img_size = os.path.getsize(os.path.join(path, f"{file_name}.huff"))
-    print(f"compressed image size (HUFF) : {huffman_img_size} bytes.")
-    arr_img = arr_img.astype('uint8')
-    io.imsave(os.path.join(path, "decoded.tiff"), arr_img)
-
-
-main(sys.argv)
+        b_enc_img = ''.join(map(lambda x: '{:08b}'.format(x), enc_img))
+        # DIM
+        arr_img = huffmanImageDecoder(b_enc_img, dim)
+        arr_img = arr_img.astype('uint8')
+        decode_stop_time = time.time()
+        # huffman_img_size = os.path.getsize(os.path.join(path, f"{file_name}.huff"))
+        # print(f"compressed image size (HUFF) : {huffman_img_size} bytes.")
+        arr_img = arr_img.astype('uint8')
+        out_img_path = os.path.join(
+            out_dir_path, f"{file_name_withoutext}.tiff")
+        io.imsave(out_img_path, arr_img)
+        return(json.dumps({'success': 'true', 'path': out_img_path}))
+    except:
+        return(json.dumps({'success': 'false'}))
