@@ -3,6 +3,11 @@ from resizeimage import resizeImage
 import json
 from huffmanCompression import compress
 from huffmanDecompression import decompress
+from PCACompression import PCACompression
+from KMeans import kmeansCompressionOneway
+from KMeans_compress import kmeansCompression
+from KMeans_decompress import kmeansDecompress
+# from Median_Cut import medianCut
 app = flask.Flask(__name__)
 
 
@@ -38,6 +43,61 @@ def huffmanDecompression():
     out_dir_path = data['out_dir_path']
     res = decompress(huff_path, filename, dim_val, out_dir_path)
     return res
+
+
+@app.route('/api/PCACompression', methods=['POST'])
+def PCACompressionHandler():
+    data = flask.request.json
+    data = json.loads(data)
+    inputImagePath = data['imagePath']
+    userDir = data['userDir']
+    imageName = data['imageName']
+    res = PCACompression(inputImagePath, userDir, imageName)
+    return res
+
+
+@app.route('/api/kmeansCompressionOneway', methods=['POST'])
+def kmeansCompressionOnewayHandler():
+    data = flask.request.json
+    data = json.loads(data)
+    inputImagePath = data['imagePath']
+    userDir = data['userDir']
+    imageName = data['imageName']
+    res = kmeansCompressionOneway(inputImagePath, userDir, imageName)
+    return res
+
+
+@app.route('/api/knnCompression', methods=['POST'])
+def kmeansCompressionHandler():
+    data = flask.request.json
+    data = json.loads(data)
+    inputImagePath = data['imagePath']
+    userDir = data['userDir']
+    imageName = data['imageName']
+    res = kmeansCompression(inputImagePath, userDir, imageName)
+    return res
+
+
+@app.route('/api/knnDecompression', methods=['POST'])
+def kmeansDecompressionHandler():
+    data = flask.request.json
+    data = json.loads(data)
+    npz_path = data['npzPath']
+    userDir = data['userDir']
+    filename = data['fileName']
+    res = kmeansDecompress(npz_path, userDir, filename)
+    return res
+
+
+# @app.route('/api/medianCut', methods=['POST'])
+# def medianCutHanler():
+#     data = flask.request.json
+#     data = json.loads(data)
+#     inputImagePath = data['imagePath']
+#     userDir = data['userDir']
+#     imageName = data['imageName']
+#     res = medianCut(inputImagePath, userDir, imageName)
+#     return res
 
 
 app.run()

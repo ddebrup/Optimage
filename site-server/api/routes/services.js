@@ -11,6 +11,16 @@ router.post(
   serviceToolsController.huffmanDecompression
 );
 
-// router.post('/')
+router.post("/PCACompression", serviceToolsController.PCACompression);
+
+// router.post("/medianCut", serviceToolsController.medianCut);
+
+router.post(
+  "/kmeansCompressionOneway",
+  serviceToolsController.kmeansCompressionOneway
+);
+
+router.post("/knnCompression", serviceToolsController.knnCompression);
+router.post("/knnDecompression", serviceToolsController.knnDecompression);
 
 module.exports = router;

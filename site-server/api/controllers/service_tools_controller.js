@@ -4,7 +4,6 @@ const pathToUploads = path.join(__dirname, "../../../uploads");
 const s3 = require("../config/aws_s3");
 const fs = require("fs");
 const s3CompressionModelHuffman = require("../models/userS3ObjectsHuffman");
-const { log } = require("console");
 
 const getObjectFromS3 = (key, userDir) => {
   return new Promise((resolve, rejects) => {
@@ -13,11 +12,7 @@ const getObjectFromS3 = (key, userDir) => {
         Bucket: process.env.AWSBucketName,
         Key: key,
       };
-      const fileName = path.join(
-        pathToUploads,
-        userDir,
-        key.split(".")[0] + ".huff"
-      );
+      const fileName = path.join(pathToUploads, userDir, key);
 
       let readstream = s3.getObject(params).createReadStream();
       let writeStream = fs.createWriteStream(fileName);
@@ -259,4 +254,159 @@ const huffmanDecompression = async (req, res) => {
   }
 };
 
-module.exports = { resizeTool, huffmanCompression, huffmanDecompression };
+const PCACompression = async (req, res) => {
+  const imageName = req.body.unique_id.toString().trim(); //in body
+  const userDir = req.user.email.toString().trim();
+  const pathOfImage = path.join(pathToUploads, userDir, imageName);
+  let data = {
+    imagePath: pathOfImage,
+    userDir: path.join(pathToUploads, userDir),
+    imageName: imageName,
+  };
+  // console.log(data);
+  const reqOptions = {
+    method: "POST",
+    url: process.env.ML_API_URL + "/api/PCACompression",
+    headers: {
+      Accept: "application/json",
+    },
+    json: JSON.stringify(data),
+  };
+  try {
+    const responseFromApi = await requestApi(reqOptions);
+    console.log(responseFromApi);
+    res.status(200).json(responseFromApi);
+  } catch {
+    res.status(500).json({ success: false });
+  }
+};
+
+// const medianCut = async (req, res) => {
+//   const imageName = req.body.unique_id.toString().trim(); //in body
+//   const userDir = req.user.email.toString().trim();
+//   const pathOfImage = path.join(pathToUploads, userDir, imageName);
+//   let data = {
+//     imagePath: pathOfImage,
+//     userDir: path.join(pathToUploads, userDir),
+//     imageName: imageName,
+//   };
+//   // console.log(data);
+//   const reqOptions = {
+//     method: "POST",
+//     url: process.env.ML_API_URL + "/api/medianCut",
+//     headers: {
+//       Accept: "application/json",
+//     },
+//     json: JSON.stringify(data),
+//   };
+//   try {
+//     const responseFromApi = await requestApi(reqOptions);
+//     console.log(responseFromApi);
+//     res.status(200).json(responseFromApi);
+//   } catch {
+//     res.status(500).json({ success: false });
+//   }
+// };
+
+const kmeansCompressionOneway = async (req, res) => {
+  const imageName = req.body.unique_id.toString().trim(); //in body
+  const userDir = req.user.email.toString().trim();
+  const pathOfImage = path.join(pathToUploads, userDir, imageName);
+  let data = {
+    imagePath: pathOfImage,
+    userDir: path.join(pathToUploads, userDir),
+    imageName: imageName,
+  };
+  // console.log(data);
+  const reqOptions = {
+    method: "POST",
+    url: process.env.ML_API_URL + "/api/kmeansCompressionOneway",
+    headers: {
+      Accept: "application/json",
+    },
+    json: JSON.stringify(data),
+  };
+  try {
+    const responseFromApi = await requestApi(reqOptions);
+    console.log(responseFromApi);
+    res.status(200).json(responseFromApi);
+  } catch {
+    res.status(500).json({ success: false });
+  }
+};
+
+const knnCompression = async (req, res) => {
+  const imageName = req.body.unique_id.toString().trim(); //in body
+  const userDir = req.user.email.toString().trim();
+  const pathOfImage = path.join(pathToUploads, userDir, imageName);
+  let data = {
+    imagePath: pathOfImage,
+    userDir: path.join(pathToUploads, userDir),
+    imageName: imageName,
+  };
+  // console.log(data);
+  const reqOptions = {
+    method: "POST",
+    url: process.env.ML_API_URL + "/api/knnCompression",
+    headers: {
+      Accept: "application/json",
+    },
+    json: JSON.stringify(data),
+  };
+  const responseFromApi = await requestApi(reqOptions);
+  console.log(responseFromApi);
+  if (responseFromApi.success == "true") {
+    const resS3 = await storeObjectToS3(
+      responseFromApi.pathOfObject,
+      responseFromApi.objectName
+    );
+    console.log(resS3);
+    if (resS3.success) {
+      res.status(200).json({
+        success: true,
+        objKey: resS3.key,
+      });
+    } else {
+      res.status(500).json({ success: false });
+    }
+  } else {
+    res.status(500).json({ success: false });
+  }
+};
+const knnDecompression = async (req, res) => {
+  try {
+    const userDir = req.user.email.toString().trim();
+    const objKey = req.body.objKey.toString().trim();
+    const { success } = await getObjectFromS3(objKey, userDir);
+    if (success) {
+      let data = {
+        npzPath: path.join(pathToUploads, userDir, objKey),
+        userDir: path.join(pathToUploads, userDir),
+        fileName: objKey,
+      };
+      // console.log(data);
+      const reqOptions = {
+        method: "POST",
+        url: process.env.ML_API_URL + "/api/knnDecompression",
+        headers: {
+          Accept: "application/json",
+        },
+        json: JSON.stringify(data),
+      };
+      const responseFromApi = await requestApi(reqOptions);
+      res.send(responseFromApi);
+    }
+  } catch {
+    res.status(404).json({ success: false });
+  }
+};
+module.exports = {
+  resizeTool,
+  huffmanCompression,
+  huffmanDecompression,
+  PCACompression,
+  // medianCut,
+  kmeansCompressionOneway,
+  knnCompression,
+  knnDecompression,
+};

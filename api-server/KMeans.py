@@ -5,13 +5,13 @@ from matplotlib.image import imread
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-import json
 import os
+import json
 from skimage import io
 from skimage.color import rgba2rgb
 
 
-def kmeansCompression(inputImagePath, userDir, imageName):
+def kmeansCompressionOneway(inputImagePath, userDir, imageName):
 
     try:
         output_image_name = 'kmeans_compressed_'+imageName
