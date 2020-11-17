@@ -85,10 +85,10 @@ body {
       border: wheat 5px solid;
       margin-top: 0;
       margin-bottom: 5%;
-     font-size: 2rem;
-     text-align: center;
-     color: wheat;
-     padding: 5%;
+      font-size: 2rem;
+      text-align: center;
+      color: wheat;
+      padding: 5%;
      
   }
   
@@ -97,9 +97,45 @@ body {
       padding-bottom: 2%;
   }
  .row { 
-    border: 1px solid;
-    border-bottom: 1px solid;
+    /*border: 1px solid;*/
+    /*border-bottom: 1px solid;*/
   }
   .container div.row:last-child {
     border-bottom: 1px solid;
   }
+
+#modal {
+    position: fixed;
+    width:100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    z-index: 1000000;
+    border-radius: 25px;
+    margin: auto;
+    display: none;
+    justify-content:center;
+  align-items: center;
+}
+
+.modal-content{
+  background-image: url("https://i.pinimg.com/originals/a7/97/e0/a797e0b7187c01f571a7ff4beb38b22f.jpg");
+ /* filter: blur(1.00);*/
+  width: 80%;
+  height: 80%;
+
+}
+
+.dia-res-btn{
+  position: absolute;
+  bottom: 2%;
+  right: 2%;  
+}
+
+.Resize-Algo{
+  position: relative;
+  margin: auto;
+  background : black;
+  width: 80%;
+  height: 80%;
+}

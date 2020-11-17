@@ -11,17 +11,19 @@ function readURL(input) {
         };
         reader.readAsDataURL(input.files[0]);
     }
+
 }
 
-$(function () {
-    $('#upload').on('change', function () {
-        readURL(input);
-    });
-});
+// $(function () {
+//     $('#upload').on('change', function () {
+//         readURL(input);
+//     });
+// });
 
 /*  ==========================================
     SHOW UPLOADED IMAGE NAME
 * ========================================== */
+let modalVisible=false;
 var input = document.getElementById( 'upload' );
 var infoArea = document.getElementById( 'upload-label' );
 
@@ -32,5 +34,30 @@ function showFileName( event ) {
   infoArea.textContent = 'File name: ' + fileName;
 }
 
-$('.file-upload').file_upload();
+// $('.file-upload').file_upload();
 
+const closeModal=()=>
+{
+     document.getElementById('modal').style.display="none"
+        modalVisible=false
+}
+const openModal=()=>
+{
+    document.getElementById('modal').style.display="flex"
+        modalVisible=true
+}
+
+document.getElementById('resize-btn').addEventListener('click',(e)=>
+{
+    console.log('in here')
+    if(!modalVisible)
+    {
+        openModal()
+    }
+    else
+    {
+        closeModal()
+    }
+})
+
+console.log('end')

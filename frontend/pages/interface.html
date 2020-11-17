@@ -16,6 +16,16 @@
     <title>Imagify</title>
   </head>
   <body>
+
+       <div id="modal">
+         <div class="modal-content">
+           <span onclick="closeModal()">X</span>
+           <div class="Resize-Algo">
+             
+           </div>
+           <button class="btn btn-danger dia-res-btn">Resize & Continue</button>
+         </div>
+       </div>
        <!-- Header-->
        <div id="navbar">
         <!-- <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
@@ -83,9 +93,9 @@
                 
             </div>
             <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-danger">Back</button>
-                <button type="button" class="btn btn-secondary">Clear</button>
-                <button type="button" class="btn btn-success">Continue</button>
+                <button type="button" class="btn btn-danger">Clear</button>
+                <button id="resize-btn" type="button" class="btn btn-secondary">Resize</button>
+                <button type="button" id="Continue" class="btn btn-success">Continue without resizing</button>
               </div>
         </div>
      </div>
