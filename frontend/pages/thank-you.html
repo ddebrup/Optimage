@@ -28,8 +28,9 @@
           <div>
             <li class="nav-item dropdown">
               <a class="active" href="./index.html">Home</a>
-              <a href="">About</a>
-              <a href="#about">Services</a>
+              <a href="./about.html">About</a>
+              <a href="./services.html">Services</a>
+              <a href="./interface.html">Interface</a>
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Login
               </a>
@@ -206,6 +207,15 @@
   
   </footer>
   <!-- Footer -->
+      <script>
+        function pageRedirect() {
+
+            window.location = window.location.href.replace("thank-you.html","index.html");
+
+                }      
+
+                setTimeout("pageRedirect()", 10000);
+    </script>
       <!-- Optional JavaScript -->
       <script src="./../scripts/script.js"></script> 
       <!-- Header script-->

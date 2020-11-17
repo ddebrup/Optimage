@@ -2,7 +2,7 @@
 #navbar {
     overflow: visibleS;
     background-color: rgb(44, 43, 43);
-    padding: 60px 5px; /* Large padding which will shrink on scroll (using JS) */
+    padding: 70px 5px; /* Large padding which will shrink on scroll (using JS) */
     transition: 0.4s; /* Adds a transition effect when the padding is decreased */
     position: fixed; /* Sticky/fixed navbar */
     width: 100%;
