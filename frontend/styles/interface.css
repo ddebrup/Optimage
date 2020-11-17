@@ -67,20 +67,20 @@ body {
 }
 
 .parallax {
-    /* The image used */
-    background-image: url("./../images/bg2.jpg");
+/*     The image used 
+*/    background-image: url("./../images/bg2.jpg");
     min-width: 100%;
-    /* Full height */
-    height: 100%;
+/*     Full height 
+*/    height: 100%;
   
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
+/*     Create the parallax scrolling effect 
+*/    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
 
-  .grid{
+/*  .grid{
       background-color: #4e515c;
       border: wheat 5px solid;
       margin-top: 0;
@@ -90,7 +90,7 @@ body {
       color: wheat;
       padding: 5%;
      
-  }
+  }*/
   
   .man{
       padding-top: 6%;
