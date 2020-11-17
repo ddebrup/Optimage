@@ -58,11 +58,48 @@ body {
     min-height: 60vh;
     background-color: #757f9a;
     background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 13%;
+    margin-bottom: 5%;
 }
  
 .py-5{
     text-align: center;
 }
 
+.parallax {
+    /* The image used */
+    background-image: url("./../images/bg2.jpg");
+    min-width: 100%;
+    /* Full height */
+    height: 100%;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .grid{
+      background-color: #4e515c;
+      border: wheat 5px solid;
+      margin-top: 0;
+      margin-bottom: 5%;
+     font-size: 2rem;
+     text-align: center;
+     color: wheat;
+     padding: 5%;
+     
+  }
+  
+  .man{
+      padding-top: 6%;
+      padding-bottom: 2%;
+  }
+ .row { 
+    border: 1px solid;
+    border-bottom: 1px solid;
+  }
+  .container div.row:last-child {
+    border-bottom: 1px solid;
+  }
