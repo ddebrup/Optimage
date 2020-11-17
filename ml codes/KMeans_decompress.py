@@ -4,9 +4,9 @@ from skimage import io
 import numpy as np
 import sys
 
-centers = np.load('codebook_sample3.npz')['arr_0']
+centers = np.load('sample_comp.npz')['x']
 
-c_image = np.load('compressed_sample3.npz')['arr_0']
+c_image = np.load('sample_comp.npz')['y']
 
 image = np.zeros((c_image.shape[0],c_image.shape[1],3),dtype=np.uint8 )
 for i in range(c_image.shape[0]):
