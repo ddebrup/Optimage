@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./../styles/interface.css" type="text/css">
+    <!-- Header css -->
+    <link rel="stylesheet" href="./../styles/headerstyle.css" type="text/css">
+    <!-- Footer css -->
+    <link rel="stylesheet" href="./../styles/footerstyle.css" type="text/css">
+    <title>Imagify</title>
+  </head>
+  <body>
+       <!-- Header-->
+       <div id="navbar">
+        <!-- <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
+          <img style="max-width:45px; margin-top: -10px;"
+               src="./images/logo.jpg">
+      </a> -->
+        <a href="#default" id="logo">Imagify</a>
+        <div id="navbar-right">
+         
+          <div>
+            <li class="nav-item dropdown">
+              <a class="active" href="./index.html">Home</a>
+              <a href="./thank-you.html">About</a>
+              <a href="">Services</a>
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Login
+              </a>
+              <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px;">
+                  <form class="form-horizontal" method="post" accept-charset="UTF-8">
+                      <input class="form-control login" type="text" name="username" placeholder="Username.."><br>
+                      <input class="form-control login" type="password" name="password" placeholder="Password.."><br>
+                      <input class="btn btn-primary" type="submit" name="submit" value="Login">
+                  </form>
+              </div>
+          </li>
+          </div>
+          
+        </div>
+      </div> 
+      <!-- Header end-->
+     <div class="upload">
+        <div class="container py-5 ">
+
+            <!-- For demo purpose -->
+            <header class="text-white text-center">
+                <h1 class="display-4">Upload Image</h1>
+                <p class="lead mb-0">All formats are allowed.</p>
+                <p class="mb-5 font-weight-light">Go back to
+                    <a href="./index.html" class="text-white">
+                        <u>Homepage</u>
+                    </a>
+                </p>
+                <img src="https://res.cloudinary.com/mhmd/image/upload/v1564991372/image_pxlho1.svg" alt="" width="150" class="mb-4">
+            </header>
+        
+        
+            <div class="row py-4">
+                <div class="col-lg-6 mx-auto">
+        
+                    <!-- Upload image input-->
+                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                        <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                        <div class="input-group-append">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        </div>
+                    </div>
+        
+                    <!-- Uploaded image area-->
+                    <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+                    <div class="image-area mt-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+        
+                </div>
+                
+            </div>
+            <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-danger">Back</button>
+                <button type="button" class="btn btn-secondary">Clear</button>
+                <button type="button" class="btn btn-success">Continue</button>
+              </div>
+        </div>
+     </div>
+      <!-- Footer -->
+  <footer class="page-footer font-small mdb-color pt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+  
+      <!-- Footer links -->
+      <div class="row text-center text-md-left mt-3 pb-3">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
+          <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+            consectetur
+            adipisicing elit.</p>
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+          <p>
+            <a href="#!">MDBootstrap</a>
+          </p>
+          <p>
+            <a href="#!">MDWordPress</a>
+          </p>
+          <p>
+            <a href="#!">BrandFlow</a>
+          </p>
+          <p>
+            <a href="#!">Bootstrap Angular</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+  
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+          <p>
+            <a href="#!">Your Account</a>
+          </p>
+          <p>
+            <a href="#!">Become an Affiliate</a>
+          </p>
+          <p>
+            <a href="#!">Shipping Rates</a>
+          </p>
+          <p>
+            <a href="#!">Help</a>
+          </p>
+        </div>
+  
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none">
+  
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+          <p>
+            <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+          <p>
+            <i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+          <p>
+            <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+          <p>
+            <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Footer links -->
+  
+      <hr>
+  
+      <!-- Grid row -->
+      <div class="row d-flex align-items-center">
+  
+        <!-- Grid column -->
+        <div class="col-md-7 col-lg-8">
+  
+          <!--Copyright-->
+          <p class="text-center text-md-left">© 2020 Copyright:
+            <a href="https://mdbootstrap.com/">
+              <strong> MDBootstrap.com</strong>
+            </a>
+          </p>
+  
+        </div>
+        <!-- Grid column -->
+  
+        <!-- Grid column -->
+        <div class="col-md-5 col-lg-4 ml-lg-0">
+  
+          <!-- Social buttons -->
+          <div class="text-center text-md-right">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-google-plus-g"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+  </footer>
+  <!-- Footer -->
+
+    
+      
+         <!-- Optional JavaScript -->
+    <script src="./../scripts/interface.js"></script> 
+    <!-- Header script-->
+    <script src="./../scripts/headerscript.js"></script> 
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
