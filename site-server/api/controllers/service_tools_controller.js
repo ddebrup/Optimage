@@ -4,6 +4,7 @@ const pathToUploads = path.join(__dirname, "../../../uploads");
 const s3 = require("../config/aws_s3");
 const fs = require("fs");
 const s3CompressionModelHuffman = require("../models/userS3ObjectsHuffman");
+const { log } = require("console");
 
 const getObjectFromS3 = (key, userDir) => {
   return new Promise((resolve, rejects) => {
@@ -230,7 +231,14 @@ const huffmanDecompression = async (req, res) => {
           json: JSON.stringify(data),
         };
         const responseFromApi = await requestApi(reqOptions);
-        res.send(responseFromApi);
+        console.log(responseFromApi);
+        if (responseFromApi.success == "true") {
+          res
+            .status(200)
+            .json({ fileName: responseFromApi.name, success: true });
+        } else {
+          res.status(500).json({ success: false });
+        }
       } else {
         res.status(404).json({
           success: false,
@@ -244,7 +252,10 @@ const huffmanDecompression = async (req, res) => {
       });
     }
   } catch {
-    res.send("fail");
+    res.status(500).json({
+      success: false,
+      message: "Uknownerr check logs",
+    });
   }
 };
 

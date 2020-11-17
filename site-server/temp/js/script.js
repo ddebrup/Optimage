@@ -107,3 +107,47 @@ const uploadFile = async (file) => {
     imageUniqueId = success.unique_id;
   }
 };
+const reqListenerDownload = (method, url, data) => {
+  return new Promise((resolve, reject) => {
+    instanceAxios({
+      method: method,
+      url: url,
+      params: data,
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImI1MTgwNTRAaWlpdC1iaC5hYy5pbiIsImlhdCI6MTYwNTMwMDM1MywiZXhwIjoxNjA1OTA1MTUzLCJpc3MiOiJhY2NvdW50cy5ndXB0YS5jb20ifQ.wAjwrrvtrDxjhSLyXOKJjxwTI5sWzzHSVtJ8dsqVtmg",
+      },
+      responseType: "blob",
+    })
+      .then((res) => {
+        resolve({
+          data: res.data,
+          success: true,
+        });
+      })
+      .catch((err) => {
+        resolve({
+          err: err.response.data,
+        });
+      });
+  });
+};
+const downloadFile = async (fileName) => {
+  const { success, err, data } = await reqListenerDownload(
+    "GET",
+    "/api/download/",
+    {
+      filename: fileName,
+    }
+  );
+  if (success) {
+    const download = window.URL.createObjectURL(new Blob([data]));
+    const link = document.createElement("a");
+    link.href = download;
+    link.setAttribute("download", fileName);
+    link.click();
+    link.remove();
+  } else {
+    console.log("not found");
+  }
+};

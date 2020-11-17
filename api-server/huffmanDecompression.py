@@ -251,6 +251,6 @@ def decompress(path_img, filename, dim_val, out_dir_path):
         out_img_path = os.path.join(
             out_dir_path, f"{file_name_withoutext}.tiff")
         io.imsave(out_img_path, arr_img)
-        return(json.dumps({'success': 'true', 'path': out_img_path}))
+        return(json.dumps({'success': 'true', 'name': f"{file_name_withoutext}.tiff"}))
     except:
         return(json.dumps({'success': 'false'}))
