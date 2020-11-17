@@ -10,3 +10,13 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "50px";
   }
 } 
+
+/* Toggle between adding and removing the "responsive" class to dropdown-menu when the user clicks on the icon */
+function ResponsiveFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
