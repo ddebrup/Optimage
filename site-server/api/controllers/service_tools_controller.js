@@ -3,6 +3,32 @@ const path = require("path");
 const pathToUploads = path.join(__dirname, "../../../uploads");
 const s3 = require("../config/aws_s3");
 const fs = require("fs");
+const s3CompressionModelHuffman = require("../models/userS3ObjectsHuffman");
+
+const getObjectFromS3 = (key, userDir) => {
+  return new Promise((resolve, rejects) => {
+    try {
+      const params = {
+        Bucket: process.env.AWSBucketName,
+        Key: key,
+      };
+      const fileName = path.join(
+        pathToUploads,
+        userDir,
+        key.split(".")[0] + ".huff"
+      );
+
+      let readstream = s3.getObject(params).createReadStream();
+      let writeStream = fs.createWriteStream(fileName);
+      readstream.pipe(writeStream);
+      writeStream.on("finish", () => {
+        resolve({ success: true });
+      });
+    } catch {
+      resolve({ success: false });
+    }
+  });
+};
 
 const storeObjectToS3 = (filePath, key) => {
   return new Promise((resolve, rejects) => {
@@ -102,10 +128,62 @@ const huffmanCompression = async (req, res) => {
 
       if (success == "true") {
         const resS3 = await storeObjectToS3(pathOfCompressedImage, objectName);
-        // console.log(resS3);
+        console.log(resS3);
         if (resS3.success) {
-          console.log(dim_val, resS3.key, req.user.email);
-          res.status(200).json(resS3);
+          // console.log(dim_val, resS3.key, req.user.email);
+          const userKeys = await s3CompressionModelHuffman.findOne({
+            email: req.user.email,
+          });
+          if (!userKeys) {
+            const modelobj = {
+              email: req.user.email,
+              objectKeys: [{ keyValue: resS3.key, dim_val: dim_val }],
+            };
+            const modelInstance = new s3CompressionModelHuffman(modelobj);
+            await modelInstance.save((err) => {
+              if (err) {
+                res.status(400).json({
+                  success: false,
+                });
+              } else {
+                res.status(200).json({
+                  success: true,
+                  key: resS3.key,
+                });
+              }
+            });
+          } else {
+            let preExistingKey = false;
+            userKeys.objectKeys.forEach((key) => {
+              if (key.keyValue == resS3.key) {
+                preExistingKey = true;
+              }
+            });
+            if (preExistingKey) {
+              res.status(400).json({
+                success: false,
+                message:
+                  "try uploading again ... You are using explicit api to upload thats why same timestamp",
+              });
+            } else {
+              userKeys.objectKeys.push({
+                keyValue: resS3.key,
+                dim_val: dim_val,
+              });
+              userKeys.save((err) => {
+                if (err) {
+                  console.log(err);
+                  res.status(400).json({ success: false });
+                } else {
+                  res.status(200).json({
+                    success: true,
+                    key: resS3.key,
+                  });
+                }
+              });
+            }
+          }
+          // console.log(userKeys);
         }
       } else {
         res.status(500).json({ success: false });
@@ -118,4 +196,56 @@ const huffmanCompression = async (req, res) => {
   }
 };
 
-module.exports = { resizeTool, huffmanCompression };
+const huffmanDecompression = async (req, res) => {
+  try {
+    const userDir = req.user.email.toString().trim();
+    const objKey = req.body.objKey.toString().trim();
+    const userHuffmanCompressedData = await s3CompressionModelHuffman.findOne({
+      email: userDir,
+    });
+    let found,
+      dim = null;
+    userHuffmanCompressedData.objectKeys.forEach((obj) => {
+      if (obj.keyValue == objKey) {
+        found = true;
+        dim = obj.dim_val;
+      }
+    });
+    if (found) {
+      const { success } = await getObjectFromS3(objKey, userDir);
+      if (success) {
+        let data = {
+          huff_path: path.join(pathToUploads, userDir, objKey),
+          filename: objKey,
+          dim_val: dim,
+          out_dir_path: path.join(pathToUploads, userDir),
+        };
+        // console.log(data);
+        const reqOptions = {
+          method: "POST",
+          url: process.env.ML_API_URL + "/api/huffmanDecompression",
+          headers: {
+            Accept: "application/json",
+          },
+          json: JSON.stringify(data),
+        };
+        const responseFromApi = await requestApi(reqOptions);
+        res.send(responseFromApi);
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "NO OBJECT IN STORE",
+        });
+      }
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "NO OBJECT IN STORE",
+      });
+    }
+  } catch {
+    res.send("fail");
+  }
+};
+
+module.exports = { resizeTool, huffmanCompression, huffmanDecompression };

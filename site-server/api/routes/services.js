@@ -6,4 +6,9 @@ router.post("/resize", serviceToolsController.resizeTool);
 
 router.post("/huffman-compression", serviceToolsController.huffmanCompression);
 
+router.post(
+  "/huffman-decompression",
+  serviceToolsController.huffmanDecompression
+);
+
 module.exports = router;
