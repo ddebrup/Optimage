@@ -42,7 +42,7 @@ html,body {
   /* first section */
   
   .bg-1 {
-    background-image: url('./images/bg1.jpg');
+    background-image: url('./../images/bg1.jpg');
     justify-content: center;
     
   }
@@ -85,7 +85,7 @@ html,body {
   }
 
   .bg-2 {
-    background-image: url('./images/bg2.jpg');
+    background-image: url('./../images/bg2.jpg');
     padding-top: 15%;
     padding-bottom: 15%;
   }
@@ -95,7 +95,7 @@ html,body {
   /* fifth section */
   
   .bg-3 {
-    background-image: url('./images/bg3.jpg');
+    background-image: url('./../images/bg3.jpg');
   }
   @import url('https://fonts.googleapis.com/css?family=Quicksand');
 
