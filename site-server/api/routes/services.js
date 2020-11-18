@@ -13,7 +13,7 @@ router.post(
 
 router.post("/PCACompression", serviceToolsController.PCACompression);
 
-// router.post("/medianCut", serviceToolsController.medianCut);
+router.post("/medianCut", serviceToolsController.medianCut);
 
 router.post(
   "/kmeansCompressionOneway",
