@@ -8,6 +8,7 @@ from KMeans import kmeansCompressionOneway
 from KMeans_compress import kmeansCompression
 from KMeans_decompress import kmeansDecompress
 from Median_Cut import medianCut
+from DCT import dctCompression
 app = flask.Flask(__name__)
 
 
@@ -97,6 +98,17 @@ def medianCutHanler():
     userDir = data['userDir']
     imageName = data['imageName']
     res = medianCut(inputImagePath, userDir, imageName)
+    return res
+
+
+@app.route('/api/dctCompression', methods=['POST'])
+def dctCompressionHanler():
+    data = flask.request.json
+    data = json.loads(data)
+    inputImagePath = data['imagePath']
+    userDir = data['userDir']
+    imageName = data['imageName']
+    res = dctCompression(inputImagePath, userDir, imageName)
     return res
 
 

@@ -15,6 +15,8 @@ router.post("/PCACompression", serviceToolsController.PCACompression);
 
 router.post("/medianCut", serviceToolsController.medianCut);
 
+router.post("/dctCompression", serviceToolsController.dctCompression);
+
 router.post(
   "/kmeansCompressionOneway",
   serviceToolsController.kmeansCompressionOneway

@@ -315,6 +315,36 @@ const medianCut = async (req, res) => {
     res.status(500).json({ success: false });
   }
 };
+const dctCompression = async (req, res) => {
+  try {
+    const imageName = req.body.unique_id.toString().trim(); //in body
+    const userDir = req.user.email.toString().trim();
+    const pathOfImage = path.join(pathToUploads, userDir, imageName);
+    let data = {
+      imagePath: pathOfImage,
+      userDir: path.join(pathToUploads, userDir),
+      imageName: imageName,
+    };
+    // console.log(data);
+    const reqOptions = {
+      method: "POST",
+      url: process.env.ML_API_URL + "/api/dctCompression",
+      headers: {
+        Accept: "application/json",
+      },
+      json: JSON.stringify(data),
+    };
+    try {
+      const responseFromApi = await requestApi(reqOptions);
+      console.log(responseFromApi);
+      res.status(200).json(responseFromApi);
+    } catch {
+      res.status(500).json({ success: false });
+    }
+  } catch {
+    res.status(500).json({ success: false });
+  }
+};
 
 const kmeansCompressionOneway = async (req, res) => {
   try {
@@ -422,6 +452,7 @@ module.exports = {
   huffmanDecompression,
   PCACompression,
   medianCut,
+  dctCompression,
   kmeansCompressionOneway,
   knnCompression,
   knnDecompression,
