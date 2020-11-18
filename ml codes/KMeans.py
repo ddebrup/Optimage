@@ -19,9 +19,9 @@ def kmeansCompression(inputImagePath, userDir, imageName):
         matimg = io.imread(inputImagePath)
         if matimg.shape[2] == 4:
             matimg = rgba2rgb(matimg)
-        io.imsave('contrast.png', matimg)
-        print('saved')
-        matimg = io.imread('contrast.png')
+            io.imsave('contrast.png', matimg)
+            print('saved')
+            matimg = io.imread('contrast.png')
 
         # reshape into 2 dimensions
         height, width = matimg.shape[0], matimg.shape[1]
