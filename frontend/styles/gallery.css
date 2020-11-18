@@ -1,0 +1,25 @@
+.parallax {
+    /* The image used */
+    background-image: url("./../images/bg2.jpg");
+    min-width: 100%;
+    /* Full height */
+    height: 100%;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .main{
+      margin-top: 15%;
+      text-align: center;
+      margin-bottom: 5%;
+  }
+
+  .heading{
+      background-color: black;
+      color: beige;
+  }
+  
