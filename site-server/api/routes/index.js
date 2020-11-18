@@ -19,6 +19,11 @@ router.use(
   require("./fileUpload")
 );
 router.use(
+  "/library",
+  passport.authenticate("jwt", { session: false }),
+  require("./library")
+);
+router.use(
   "/download",
   passport.authenticate("jwt", { session: false }),
   require("./fileDownload")

@@ -4,6 +4,7 @@ const pathToUploads = path.join(__dirname, "../../../uploads");
 const s3 = require("../config/aws_s3");
 const fs = require("fs");
 const s3CompressionModelHuffman = require("../models/userS3ObjectsHuffman");
+const userLibraryModel = require("../models/userLibrary");
 
 const getObjectFromS3 = (key, userDir) => {
   return new Promise((resolve, rejects) => {
@@ -45,6 +46,55 @@ const storeObjectToS3 = (filePath, key) => {
         });
       }
     });
+  });
+};
+
+const updateUserLirary = async (
+  email,
+  objKey,
+  decompressionReq,
+  algorithmUsed,
+  extension
+) => {
+  return new Promise(async (resolve, rejects) => {
+    const userLib = await userLibraryModel.findOne({
+      email: email,
+    });
+    if (!userLib) {
+      const libObj = {
+        email: email,
+        objectKeys: [
+          {
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension,
+          },
+        ],
+      };
+      const modelObj = new userLibraryModel(libObj);
+      await modelObj.save((err) => {
+        if (err) {
+          resolve({ success: false });
+        } else {
+          resolve({ success: true });
+        }
+      });
+    } else {
+      userLib.objectKeys.push({
+        objKey,
+        decompressionReq,
+        algorithmUsed,
+        extension,
+      });
+      await userLib.save((err) => {
+        if (err) {
+          resolve({ success: false });
+        } else {
+          resolve({ success: true });
+        }
+      });
+    }
   });
 };
 
@@ -97,6 +147,8 @@ const huffmanCompression = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -127,6 +179,17 @@ const huffmanCompression = async (req, res) => {
         console.log(resS3);
         if (resS3.success) {
           // console.log(dim_val, resS3.key, req.user.email);
+          const objKey = resS3.key;
+          const decompressionReq = true;
+          const algorithmUsed = "Huffman";
+          const resLibSaver = await updateUserLirary(
+            req.user.email,
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension
+          );
+
           const userKeys = await s3CompressionModelHuffman.findOne({
             email: req.user.email,
           });
@@ -144,7 +207,7 @@ const huffmanCompression = async (req, res) => {
               } else {
                 res.status(200).json({
                   success: true,
-                  key: resS3.key,
+                  message: "Saved Successfully in Library",
                 });
               }
             });
@@ -173,13 +236,12 @@ const huffmanCompression = async (req, res) => {
                 } else {
                   res.status(200).json({
                     success: true,
-                    key: resS3.key,
+                    message: "Saved Successfully in Library",
                   });
                 }
               });
             }
           }
-          // console.log(userKeys);
         }
       } else {
         res.status(500).json({ success: false });
@@ -258,6 +320,8 @@ const PCACompression = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -276,7 +340,35 @@ const PCACompression = async (req, res) => {
     try {
       const responseFromApi = await requestApi(reqOptions);
       console.log(responseFromApi);
-      res.status(200).json(responseFromApi);
+      if (responseFromApi.success == "true") {
+        const resS3 = await storeObjectToS3(
+          path.join(pathToUploads, userDir, responseFromApi.output_image),
+          responseFromApi.output_image
+        );
+        if (resS3.success) {
+          const objKey = resS3.key;
+          const decompressionReq = false;
+          const algorithmUsed = "PCA";
+          const resLibSaver = await updateUserLirary(
+            req.user.email,
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension
+          );
+          if (resLibSaver.success) {
+            res
+              .status(200)
+              .json({ success: true, message: "Saved in Your Library" });
+          } else {
+            res.status(500).json({ success: false });
+          }
+        } else {
+          res.status(500).json({ success: false });
+        }
+      } else {
+        res.status(500).json({ success: false });
+      }
     } catch {
       res.status(500).json({ success: false });
     }
@@ -289,6 +381,8 @@ const medianCut = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -307,7 +401,35 @@ const medianCut = async (req, res) => {
     try {
       const responseFromApi = await requestApi(reqOptions);
       console.log(responseFromApi);
-      res.status(200).json(responseFromApi);
+      if (responseFromApi.success == "true") {
+        const resS3 = await storeObjectToS3(
+          path.join(pathToUploads, userDir, responseFromApi.output_image),
+          responseFromApi.output_image
+        );
+        if (resS3.success) {
+          const objKey = resS3.key;
+          const decompressionReq = false;
+          const algorithmUsed = "Median Cut";
+          const resLibSaver = await updateUserLirary(
+            req.user.email,
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension
+          );
+          if (resLibSaver.success) {
+            res
+              .status(200)
+              .json({ success: true, message: "Saved in Your Library" });
+          } else {
+            res.status(500).json({ success: false });
+          }
+        } else {
+          res.status(500).json({ success: false });
+        }
+      } else {
+        res.status(500).json({ success: false });
+      }
     } catch {
       res.status(500).json({ success: false });
     }
@@ -315,10 +437,13 @@ const medianCut = async (req, res) => {
     res.status(500).json({ success: false });
   }
 };
+
 const dctCompression = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -337,7 +462,35 @@ const dctCompression = async (req, res) => {
     try {
       const responseFromApi = await requestApi(reqOptions);
       console.log(responseFromApi);
-      res.status(200).json(responseFromApi);
+      if (responseFromApi.success == "true") {
+        const resS3 = await storeObjectToS3(
+          path.join(pathToUploads, userDir, responseFromApi.output_image),
+          responseFromApi.output_image
+        );
+        if (resS3.success) {
+          const objKey = resS3.key;
+          const decompressionReq = false;
+          const algorithmUsed = "DCT";
+          const resLibSaver = await updateUserLirary(
+            req.user.email,
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension
+          );
+          if (resLibSaver.success) {
+            res
+              .status(200)
+              .json({ success: true, message: "Saved in Your Library" });
+          } else {
+            res.status(500).json({ success: false });
+          }
+        } else {
+          res.status(500).json({ success: false });
+        }
+      } else {
+        res.status(500).json({ success: false });
+      }
     } catch {
       res.status(500).json({ success: false });
     }
@@ -350,6 +503,8 @@ const kmeansCompressionOneway = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -368,7 +523,35 @@ const kmeansCompressionOneway = async (req, res) => {
     try {
       const responseFromApi = await requestApi(reqOptions);
       console.log(responseFromApi);
-      res.status(200).json(responseFromApi);
+      if (responseFromApi.success == "true") {
+        const resS3 = await storeObjectToS3(
+          path.join(pathToUploads, userDir, responseFromApi.output_image),
+          responseFromApi.output_image
+        );
+        if (resS3.success) {
+          const objKey = resS3.key;
+          const decompressionReq = false;
+          const algorithmUsed = "K-Means";
+          const resLibSaver = await updateUserLirary(
+            req.user.email,
+            objKey,
+            decompressionReq,
+            algorithmUsed,
+            extension
+          );
+          if (resLibSaver.success) {
+            res
+              .status(200)
+              .json({ success: true, message: "Saved in Your Library" });
+          } else {
+            res.status(500).json({ success: false });
+          }
+        } else {
+          res.status(500).json({ success: false });
+        }
+      } else {
+        res.status(500).json({ success: false });
+      }
     } catch {
       res.status(500).json({ success: false });
     }
@@ -381,6 +564,8 @@ const knnCompression = async (req, res) => {
   try {
     const imageName = req.body.unique_id.toString().trim(); //in body
     const userDir = req.user.email.toString().trim();
+    const ar = imageName.split(".");
+    const extension = ar[ar.length - 1];
     const pathOfImage = path.join(pathToUploads, userDir, imageName);
     let data = {
       imagePath: pathOfImage,
@@ -405,10 +590,23 @@ const knnCompression = async (req, res) => {
       );
       console.log(resS3);
       if (resS3.success) {
-        res.status(200).json({
-          success: true,
-          objKey: resS3.key,
-        });
+        const objKey = resS3.key;
+        const decompressionReq = true;
+        const algorithmUsed = "KmeansCompression";
+        const resLibSaver = await updateUserLirary(
+          req.user.email,
+          objKey,
+          decompressionReq,
+          algorithmUsed,
+          extension
+        );
+        if (resLibSaver.success) {
+          res
+            .status(200)
+            .json({ success: true, message: "Saved in Your Library" });
+        } else {
+          res.status(500).json({ success: false });
+        }
       } else {
         res.status(500).json({ success: false });
       }
@@ -419,6 +617,7 @@ const knnCompression = async (req, res) => {
     res.status(500).json({ success: false });
   }
 };
+
 const knnDecompression = async (req, res) => {
   try {
     const userDir = req.user.email.toString().trim();

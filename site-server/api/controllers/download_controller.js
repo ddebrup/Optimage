@@ -1,4 +1,3 @@
-const { fstat } = require("fs");
 const path = require("path");
 const pathToUploads = path.join(__dirname, "../../../uploads");
 const fs = require("fs");
