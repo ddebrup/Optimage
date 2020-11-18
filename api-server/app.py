@@ -42,7 +42,8 @@ def huffmanDecompression():
     filename = data['filename']
     dim_val = data['dim_val']
     out_dir_path = data['out_dir_path']
-    res = decompress(huff_path, filename, dim_val, out_dir_path)
+    ext = data['ext']
+    res = decompress(huff_path, filename, dim_val, out_dir_path, ext)
     return res
 
 
@@ -86,7 +87,8 @@ def kmeansDecompressionHandler():
     npz_path = data['npzPath']
     userDir = data['userDir']
     filename = data['fileName']
-    res = kmeansDecompress(npz_path, userDir, filename)
+    ext = data['ext']
+    res = kmeansDecompress(npz_path, userDir, filename, ext)
     return res
 
 

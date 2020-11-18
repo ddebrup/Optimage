@@ -5,9 +5,9 @@ import json
 import os
 
 
-def kmeansDecompress(npz_path, userDir, filename):
+def kmeansDecompress(npz_path, userDir, filename, ext):
     try:
-        out_file_name = filename.split('.')[0]+'.jpg'
+        out_file_name = filename.split('.')[0]+'.'+ext
         outputPath = os.path.join(userDir, out_file_name)
         centers = np.load(npz_path)['x']
 

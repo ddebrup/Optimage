@@ -232,7 +232,7 @@ def encodePixelValue(huffmanMap, img_array):
     return encoded_px
 
 
-def decompress(path_img, filename, dim_val, out_dir_path):
+def decompress(path_img, filename, dim_val, out_dir_path, ext):
     try:
         # all input goes here
         file_name_withoutext = filename.split('.')[0]
@@ -249,8 +249,8 @@ def decompress(path_img, filename, dim_val, out_dir_path):
         # print(f"compressed image size (HUFF) : {huffman_img_size} bytes.")
         arr_img = arr_img.astype('uint8')
         out_img_path = os.path.join(
-            out_dir_path, f"{file_name_withoutext}.tiff")
+            out_dir_path, file_name_withoutext+'.'+ext)
         io.imsave(out_img_path, arr_img)
-        return(json.dumps({'success': 'true', 'name': f"{file_name_withoutext}.tiff"}))
+        return(json.dumps({'success': 'true', 'name': file_name_withoutext+'.'+ext}))
     except:
         return(json.dumps({'success': 'false'}))
