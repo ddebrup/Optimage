@@ -37,7 +37,8 @@ var resizeableImage = function (image_target) {
     max_width = 800,
     max_height = 800,
     resize_canvas = document.createElement("canvas");
-  orig_src.addEventListener("load", () => {
+  orig_src.addEventListener("load", function () {
+    console.log(this.width, this.height);
     resizeImage(400, 400);
   });
   init = function () {

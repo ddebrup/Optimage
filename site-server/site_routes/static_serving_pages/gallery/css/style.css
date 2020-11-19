@@ -1,0 +1,133 @@
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,700,500,300);
+.jumbotron {
+  height: 40rem;
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  background: url("../assets/back-home.png");
+}
+
+.content {
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  align-items: center;
+}
+
+.fixed-bg {
+  height: 100%;
+  align-content: center;
+}
+.fixed-bg {
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.scroll-bg {
+  background-color: #0f0f0a;
+}
+
+/* first section */
+
+.bg-1 {
+  background-image: url("../assets/bg1.jpg");
+  justify-content: center;
+}
+
+#bg-1 {
+  margin: auto;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+/* third section */
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
+#countdown {
+  width: 100%;
+}
+label {
+  clear: both;
+  display: block;
+}
+#countdown span {
+  background: rgba(0, 0, 0, 0);
+  color: wheat;
+  font-size: 26px;
+  font-weight: normal;
+  text-align: center;
+  width: 25%;
+  display: block;
+  float: left;
+  border-right: 1px solid #fff;
+}
+#countdown span:last-child {
+  border-right: 1px solid wheat;
+}
+
+.bg-2 {
+  background-image: url("../assets/bg3.jpg");
+  padding-top: 15%;
+  padding-bottom: 15%;
+}
+.py-5 {
+  background-color: #000;
+}
+/* fifth section */
+
+.bg-3 {
+  background-image: url("../assets/bg3.jpg");
+}
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+
+.wrapper {
+  font-family: "Quicksand", sans-serif;
+  line-height: 1.5;
+  word-spacing: 4px;
+  letter-spacing: 1px;
+}
+
+.fixed-bg {
+  color: white;
+}
+
+.scroll-bg {
+  padding: 10px 70px;
+  color: #676767;
+}
+.fixed-bg {
+  width: 100%;
+  text-align: center;
+  display: table;
+}
+
+.fixed-bg h1 {
+  display: table-cell;
+  vertical-align: middle;
+}
+.bg-3 {
+  height: 50vh;
+}
+
+.card-deck {
+  margin: 0;
+}
+.card {
+  margin: 10px;
+}

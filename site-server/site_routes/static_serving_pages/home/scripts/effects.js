@@ -1,7 +1,7 @@
-const signInEndpoint = "/api/sign-in";
 const instanceAxios = axios.create({
   timeout: 8000,
 });
+
 const reqListener = (method, url, data) => {
   return new Promise((resolve, reject) => {
     instanceAxios({
@@ -26,6 +26,7 @@ const reqListener = (method, url, data) => {
       });
   });
 };
+
 const getToken = (key) => {
   const tokenFromStorage = localStorage.getItem("access_token");
   var name = key + "=";
@@ -42,29 +43,21 @@ const getToken = (key) => {
   }
   return tokenFromStorage;
 };
-const setCookie = (key, value, exdays) => {
-  localStorage.setItem(key, value);
-  var d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  var expires = "expires=" + d.toGMTString();
-  document.cookie = key + "=" + value + ";path=/";
-  document.cookie = expires + ";path=/";
-};
-document.getElementById("login-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  let data = {
-    email: form.email.value,
-    password: form.password.value,
-  };
-  console.log(data);
-  const { success, err } = await reqListener("post", signInEndpoint, data);
-  if (success && success.success === true) {
-    console.log(success);
-    document.getElementById("res-mssg").innerText = success.message;
-    setCookie("access_token", success.data.token, 30); //expires in 30 days
-    location.href = "/";
-  } else if (err) {
-    document.getElementById("res-mssg").innerText = err.message;
+
+const loadUser = async () => {
+  const token = getToken("access_token");
+  if (token) {
+    const { success, err } = await reqListener("get", "/api/");
+    if (success && success.success == true) {
+      console.log(success);
+      document.getElementById("login-btn").style.display = "none";
+      document.getElementById("avatar-div").style.display = "flex";
+    } else {
+      console.log("invalid token");
+    }
+  } else {
+    console.log("no session token found");
   }
-});
+};
+
+loadUser();

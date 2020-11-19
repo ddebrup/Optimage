@@ -145,6 +145,7 @@ const getAllObjects = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "No Objects in gallery",
+      data: [],
     });
   } else {
     const ObjectsArr = userLib.objectKeys;
@@ -152,6 +153,7 @@ const getAllObjects = async (req, res) => {
       res.status(200).json({
         success: true,
         message: "No Objects in gallery",
+        data: [],
       });
     } else {
       ObjectsArr.forEach((obj) => {

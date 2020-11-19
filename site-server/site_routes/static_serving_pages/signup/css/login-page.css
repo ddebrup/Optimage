@@ -26,7 +26,7 @@ button {
   width: 100%;
   padding: 10px;
   border-style: hidden;
-  background-color: #46cb18;
+  background-color: rgba(45, 166, 196, 1);
   border-radius: 10px;
   height: 43px;
   border-radius: 10px;
@@ -54,7 +54,7 @@ img {
 
 #side-div > img {
   height: 100vh !important;
-  background-color: #46cb18;
+  background-color: rgba(45, 166, 196, 1);
   background-image: url("../assets/noise.svg");
 }
 
@@ -90,7 +90,7 @@ input:hover,
 input:focus {
   background-color: rgba(136, 217, 105, 0.1);
   opacity: 0.95;
-  border: 2px solid #46cb18;
+  border: 2px solid rgba(45, 166, 196, 1);
   box-sizing: border-box;
   border-radius: 9.16731px;
 }
@@ -102,7 +102,7 @@ input:focus {
 }
 
 a {
-  color: #46cb18;
+  color: rgba(45, 166, 196, 1);
 }
 
 button::-moz-focus-inner,
@@ -132,8 +132,10 @@ input::-moz-focus-inner {
 }
 
 #logo img {
-  width: 80px;
-  height: 61px;
+  top: 15px;
+  width: 150px;
+  position: relative;
+  height: 70px;
 }
 
 .login-form-div {
@@ -153,7 +155,7 @@ input::-moz-focus-inner {
 
 .sidebar-image-div {
   width: 50%;
-  /* background-color: #46CB18; */
+  /* background-color: rgba(45, 166, 196, 1); */
   background-image: url("../assets/noise.svg");
 }
 
@@ -268,7 +270,7 @@ input::-moz-focus-inner {
   font-size: 14px;
   line-height: 141.5%;
   text-align: center;
-  color: #46cb18;
+  color: rgba(45, 166, 196, 1);
 }
 
 #forgot-form > div {
