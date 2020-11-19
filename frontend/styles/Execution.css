@@ -87,12 +87,42 @@ body {
   
   .man{
       padding-top: 6%;
-      padding-bottom: 2%;
+      padding-bottomom: 2%;
   }
- .row { 
+
+  .row { 
     border: 1px solid;
     border-bottom: 1px solid;
   }
+
   .container div.row:last-child {
     border-bottom: 1px solid;
+  } 
+
+  .Comp-Store-content{
+    border: 0;
+    float: left;
+    font-size: 30px;
+    display: flex;
+    flex-wrap: wrap
+/*    border: wheat 5px solid;  
+*/  }
+
+  .KMeans, .PCA, .DCT, .MedianCut{
+    display: inline-block;
+    width: 33%;
+    height: 55%;
+    padding: 10px;
+    margin: 10px;
+    height: auto;
+    border: wheat 5px solid;  
+  } 
+
+  .Comp-Decomp-content{
+
+  }
+
+  .btn-algo{
+    height: 100%;
+    width: 100%;
   }

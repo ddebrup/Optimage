@@ -43,8 +43,10 @@ const closeModal=()=>
 }
 const openModal=()=>
 {
-    document.getElementById('modal').style.display="flex"
-        modalVisible=true
+
+        document.getElementById('modal').style.display="flex";
+        $('#modal').hide().fadeIn(500);
+        modalVisible=true;
 }
 
 document.getElementById('resize-btn').addEventListener('click',(e)=>
@@ -60,4 +62,3 @@ document.getElementById('resize-btn').addEventListener('click',(e)=>
     }
 })
 
-console.log('end')

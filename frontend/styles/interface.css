@@ -68,13 +68,13 @@ body {
 
 .parallax {
 /*     The image used 
-*/    background-image: url("./../images/bg2.jpg");
+*/  background-image: url("./../images/bg2.jpg");
     min-width: 100%;
 /*     Full height 
-*/    height: 100%;
+*/  height: 100%;
   
 /*     Create the parallax scrolling effect 
-*/    background-attachment: fixed;
+*/  background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -115,7 +115,8 @@ body {
     margin: auto;
     display: none;
     justify-content:center;
-  align-items: center;
+    align-items: center;
+
 }
 
 .modal-content{
