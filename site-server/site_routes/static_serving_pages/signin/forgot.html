@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+    <!-- <script src="https://kit.fontawesome.com/ffda2c1e75.js" crossorigin="anonymous"></script> -->
+    <title>AH Consultancy</title>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link rel="icon" href="./assets/ah-logo.jpg" sizes="30x30" type="image/png">
+    <link rel="stylesheet" href="./css/login-page.css">
+    <link rel="stylesheet" href="./css/slider.css">
+
+</head>
+
+<body>
+    <ul class="header">
+        <li id="logo">
+            <a><img src="./assets/ah-logo.jpg"></a>
+        </li>
+
+    </ul>
+    <div class="sidebar-image-div" id="side-div">
+        <div class="mySlides fade">
+            <img src="./assets/slide-1.jpg">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="./assets/slide-2.jpg">
+        </div>
+        <div class="mySlides fade">
+            <img src="./assets/slide-3.jpg">
+        </div>
+        <!-- <a class="prev" onclick="moveSlidesby(-1)">&#10094;</a>
+        <a class="next" onclick="moveSlidesby(1)">&#10095;</a> -->
+    </div>
+    <div class="body-wrapper">
+        <div id="forgot-login-div" class="login-form-div">
+
+            <!-- header ends---------- -->
+            <div class="form-container">
+                <h1><span id="mssg-span" style="color:#46CB18;">Forgot Your Password?</span></h1>
+                <div id="mssg-div" class="message-div">No worries! Enter your email and we'll<br> send you a link to
+                    reset it.</div>
+                <form id="forgot-form">
+                    <div class="form-ele">
+                        <input type="email" id="email" placeholder="Email" required autocomplete="off">
+                    </div>
+                    <div class="form-ele ">
+                        <button>SUBMIT</button>
+                    </div>
+                </form>
+
+            </div>
+            <section class="footer" id="footer-forgot">
+                Don't have an account yet? <span style="color: #0F6EFF;"><a href="/signup"><u>Register
+                            Now</u></a></span>
+            </section>
+        </div>
+
+    </div>
+
+
+    <script>
+        const forgotForm = document.querySelector('#forgot-form')
+        forgotForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const email = e.target.elements.email.value
+            ///// sending email to server then-------
+            console.log(email);
+            forgotForm.style.display = "none"
+            document.querySelector('#mssg-div').style.display = "none"
+            document.querySelector('#mssg-span').innerHTML = "Perfect, check your email to reset your password!"
+
+        })
+    </script>
+    <script src="./effects/index.js"></script>
+</body>
+
+</html>
