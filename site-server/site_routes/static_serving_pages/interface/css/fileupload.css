@@ -1,0 +1,85 @@
+body {
+  font-family: sans-serif;
+}
+a {
+  color: #369;
+}
+
+#drop-area {
+  border: 2px dashed rgb(45, 166, 196);
+  border-radius: 10px;
+  width: 41%;
+  height: 270px;
+  margin: 50px auto;
+  cursor: pointer;
+  background-image: url("../assets/uploadbg.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#drop-area.highlight {
+  border-color: purple;
+}
+p {
+  margin-top: 0;
+}
+.my-form {
+  margin-bottom: 10px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.button:hover {
+  background: #ddd;
+}
+#fileElem {
+  display: none;
+}
+#preview-image {
+  width: 100%;
+  height: 100%;
+}
+#optimisation-section {
+  display: none;
+  justify-content: space-between;
+}
+#fileUploadBtn {
+  visibility: hidden;
+}
+#no-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px !important;
+}
+#no-image > div {
+  padding: 50px;
+  background-color: white;
+  text-align: center;
+  font-size: 17px;
+  width: 41%;
+  border: 2px dashed #ccc;
+}
+
+#preview-area {
+  border: 5px solid rgba(45, 166, 196, 0.7);
+  border-radius: 6px;
+  width: 60%;
+  height: 500px;
+  margin: 50px auto;
+  padding: 10px;
+  display: flex;
+}
+#compression-area {
+  width: 35%;
+  background-color: white;
+  margin: 50px auto;
+  border-radius: 6px;
+  border: 2px solid rgb(45, 166, 196);
+}

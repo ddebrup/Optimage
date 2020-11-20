@@ -1,0 +1,50 @@
+body {
+  overflow-x: hidden;
+  scrollbar-color: white rgba(45, 166, 196, 1);
+  scrollbar-width: thin;
+  background: rgb(134, 224, 233);
+  background: linear-gradient(
+    70deg,
+    rgba(134, 224, 233, 0.1) 90%,
+    rgba(0, 212, 255, 0.4) 100%
+  );
+}
+body::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(45, 166, 196, 1);
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+}
+#heading-section {
+  display: flex;
+  justify-content: center;
+}
+#container-interface {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+#container-interface > section {
+  width: 90%;
+  margin: 10px 5%;
+}
+
+#upload-head {
+  text-align: center;
+  background-color: whitesmoke;
+  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.27);
+  width: 50%;
+  padding: 5px 10px;
+  color: rgb(45, 166, 196);
+  font-weight: 600;
+  font-size: large;
+  border-radius: 5px;
+  background-color: white;
+}

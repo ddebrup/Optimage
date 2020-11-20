@@ -6,13 +6,18 @@ const pathToSignup = path.join(__dirname, "static_serving_pages", "signup");
 const pathToHome = path.join(__dirname, "static_serving_pages", "home");
 const pathToAbout = path.join(__dirname, "static_serving_pages", "about");
 const pathToGallery = path.join(__dirname, "static_serving_pages", "gallery");
+const pathToInterface = path.join(
+  __dirname,
+  "static_serving_pages",
+  "interface"
+);
 
 router.use("/", express.static(pathToHome));
 
 router.use("/about", express.static(pathToAbout));
 
 router.use("/gallery", express.static(pathToGallery));
-
+router.use("/interface", express.static(pathToInterface));
 router.use("/signin", express.static(pathToSignin));
 router.use("/signup", express.static(pathToSignup));
 
