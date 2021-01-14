@@ -36,12 +36,11 @@ To run the code :-
 You can now open the application at localhost:3000
 
 
-### Team Members
+### Contributors
 ----------------------------------
 
-Aditya Bhardwaj - b518005@iiit-bh.ac.in - UI/ UX Design, Documentation, Project Design <br>
-Aditya Gupta - b518006@iiit-bh.ac.in - NodeJS backend development, Flask API development & Stress Testing, UI/ UX development & Integration <br>
-Debrup Dutta - b518020@iiit-bh.ac.in - UI/ UX Design & development, Project Research & Scripting, Documentation <br>
-Subham Sharma - b518054@iiit-bh.ac.in - Machine Learning & Compression algorithms, Debugging, Testing & Documentation, Project Concept & Research
-
+Aditya Bhardwaj - b518005@iiit-bh.ac.in  <br>
+Aditya Gupta - b518006@iiit-bh.ac.in  <br>
+Debrup Dutta - b518020@iiit-bh.ac.in  <br>
+Subham Sharma - b518054@iiit-bh.ac.in 
 
