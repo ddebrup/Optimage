@@ -1,4 +1,4 @@
-## Team Name - Coders Legacy
+## Optimage
 
 ### Project Overview
 ----------------------------------
@@ -19,7 +19,7 @@ Optimage is therefore a smart web application with an easy to use interface for 
 
 #### Architecture Diagram
 
-![Architecture](Documentation/architecture.png)
+<img alt="Image" src="https://github.com/ddebrup/Optimage/blob/master/Documentation_architecture.png?raw=true" />
 
 #### Technical Description
 
